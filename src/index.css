@@ -13,39 +13,57 @@ body {
     position: relative;
     overflow: hidden;
     padding: 10px;
-    padding:0;
+    padding: 0;
 }
 
 div {
     position: relative;
     text-align: left;
-    text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 40px rgba(255, 255, 255, 0.8),
-    0 0 80px rgba(255, 255, 255, 0.7),
-    0 0 120px rgba(255, 255, 255, 0.6);
-    animation: flicker 10s infinite alternate;
 }
 
-@keyframes flicker {
-    0% { opacity: 1; text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.9),
-        0 0 50px rgba(255, 255, 255, 0.9);
+.bloom::before {
+    left:0;
+    top:0;
+    min-width: none;
+    display: flex;
+    content: attr(text_content);
+}
+:root{
+    --animation-start-time: calc(var(--global-time) * -1s);
+}
+.bloom::after{
+    filter: blur(7px);
+    position: absolute;
+    left:0;
+    top:0; 
+    content: attr(text_content);
+    z-index:-1;
+    animation: bloom 5s infinite alternate;
+}
+#command::after{
+    filter: blur(7px);
+    position: absolute;
+    left:0;
+    top:0; 
+    content: attr(text_content);
+    z-index:-1;
+    animation: bloom 5s infinite alternate;
+}
+.command{
+    position: relative;
+}
+.bloom{
+    font-family: monospace;
+    color:rgb(255, 255, 255);
+    font-size: 24px;
+    position: relative;
+}
+@keyframes bloom{
+    0%{
+        filter:blur(2px)
     }
-
-    40% { opacity: 0.98; text-shadow:
-         0 0 8px rgba(255, 255, 255, 0.8),
-         0 0 45px rgba(255, 255, 255, 0.7);
-    }
-
-    60% { opacity: 1; text-shadow:
-         0 0 12px rgba(255, 255, 255, 1),
-         0 0 55px rgba(255, 255, 255, 0.95);
-    }
-
-    100% { opacity: 0.92; text-shadow:
-          0 0 9px rgba(255, 255, 255, 0.85),
-          0 0 48px rgba(255, 255, 255, 0.75);
+    100%{
+        filter:blur(7px)
     }
 }
 
@@ -57,7 +75,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 80px 80px;
     z-index: -1;
     opacity: 0.5;
@@ -68,13 +86,11 @@ body::after {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.03),
-        rgba(255, 255, 255, 0.03) 1px,
-        transparent 2px,
-        transparent 5px
-    );
+    background: repeating-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 2px,
+            transparent 5px);
     background-size: 120px 120px;
     mix-blend-mode: overlay;
     z-index: -1;
@@ -129,8 +145,13 @@ p {
 }
 
 @keyframes blink-cursor {
-    0% { opacity: 100; }
-    50% { opacity: 0; }
+    0% {
+        opacity: 100;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 .prompt {
@@ -142,16 +163,16 @@ p {
 }
 
 #nano-editor {
-display: none;
-background: rgb(255, 255, 255, 0);
-color: rgb(255, 255, 255);
-font-size: 24px;
-border: none;
-outline: none;
-width: 100%;
-height: 100px;
-flex-grow: 1;
-animation: flicker 10s infinite alternate;
+    display: none;
+    background: rgb(255, 255, 255, 0);
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100px;
+    flex-grow: 1;
+    animation: flicker 10s infinite alternate;
 }
 
 .scanlines {
@@ -160,13 +181,11 @@ animation: flicker 10s infinite alternate;
     left: 0;
     width: 100%;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.03) 3px,
-        transparent 4px
-    );
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 3px,
+            transparent 4px);
     pointer-events: none;
     z-index: 2;
 }
@@ -175,9 +194,10 @@ animation: flicker 10s infinite alternate;
     filter: url(#fisheye);
 }
 
-#browser-frame {                        
+#browser-frame {
     filter: none !important;
 }
+
 .terminal {
     filter: none !important;
 }
