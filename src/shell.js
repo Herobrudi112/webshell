@@ -596,8 +596,8 @@ async function runPython(code) {
 async function executeCommand(cmd) {
     if (cmd.trim() && cmd != commandHistory[commandHistory.length - 1]) {
         commandHistory.push(cmd);
-        historyIndex = commandHistory.length;
     }
+    historyIndex = commandHistory.length;
     const parts = cmd.trim().split(' ');
     const commands = cmd.split('|').map(c => c.trim()); // Split commands by '|'
     let input = ''; // Store output of previous command
