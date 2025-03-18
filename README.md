@@ -14,7 +14,7 @@ But if you HATE sharing your ip-address with us, you can also run it locally:
 2. Open `src/terminal.html`
 
 ## Planned features:
-1.Packet Manager
+- Fix bugs.
 
 
 ## WOW i love this project so much i just HAVE to contribute to it!
